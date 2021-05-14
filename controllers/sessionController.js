@@ -3,7 +3,7 @@ import Session from '../models/Session.js'
 
 //@desc Get all sessions
 //@route GET /api/sessions
-//@access public
+//@access private
 
 export const getSessions = async (req, res, next) => {
   try {
@@ -41,13 +41,46 @@ export const getSessions = async (req, res, next) => {
 
 //@desc Add sessions
 //@route POST /api/sessions
-//@access public
+//@access private
 
 export const addSessions = async (req, res, next) => {
   try {
-    const { text, amount } = req.body //What the fuck does this do?
-
     const session = await Session.create(req.body)
+
+    return res.status(201).json({
+      success: true,
+      data: session,
+    })
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      const message = Object.values(err.errors).map((val) => val.message)
+      return res.status(400).json({
+        success: false,
+        error: message,
+      })
+    } else {
+      return res.status(500).json({
+        success: false,
+        error: 'Server Error',
+      })
+    }
+  }
+}
+
+//@desc Edit sessions
+//@route PUT /api/sessions/edit/:id
+//@access public
+
+export const editSession = async (req, res, next) => {
+  try {
+    const session = await Session.findById(req.params.id)
+
+    session.location = req.body.location
+    session.date = req.body.date
+    session.time = req.body.time
+    session.notes = req.body.notes
+    session.totalCosts = req.body.totalCosts
+    await session.save()
 
     return res.status(201).json({
       success: true,
@@ -71,7 +104,7 @@ export const addSessions = async (req, res, next) => {
 
 //@desc Delete all sessions
 //@route DELETE /api/sessions/:id
-//@access public
+//@access private
 
 export const deleteSessions = async (req, res, next) => {
   try {
@@ -98,7 +131,7 @@ export const deleteSessions = async (req, res, next) => {
 
 //@desc Add Player
 //@route POST /api/sessions/:id
-//@access public
+//@access private
 
 export const addPlayer = async (req, res, next) => {
   try {
@@ -126,7 +159,7 @@ export const addPlayer = async (req, res, next) => {
 
 //@desc Remove Player
 //@route Delete /api/sessions/:id
-//@access public
+//@access private
 
 export const removePlayer = async (req, res, next) => {
   try {
