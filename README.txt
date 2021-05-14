@@ -1,8 +1,6 @@
-Session list categories
+Features to add:
 
-Session #
-Hosted By
-Date
-Time
-Total Costs
-Outstanding Amount
+- Edit session
+- Payment feature
+- Waiting List 
+- Email notification for waiting list
