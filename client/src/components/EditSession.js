@@ -1,24 +1,25 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
-import { Form, Button, Alert, Col, Row } from 'react-bootstrap'
+import { Form, Button, Alert } from 'react-bootstrap'
+import FormContainer from './FormContainer'
+import moment from 'moment'
 
-const AddSession = ({ handleClose }) => {
-  const [location, setLocation] = useState('')
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
-  const [totalCosts, setTotalCosts] = useState(0)
-  const [notes, setNotes] = useState('')
+const EditSession = () => {
+  const { activeItem, editSession, userInfo, error } = useContext(GlobalContext)
+
+  const [location, setLocation] = useState(activeItem.location)
+  const [date, setDate] = useState(activeItem.date)
+  const [time, setTime] = useState(activeItem.time)
+  const [totalCosts, setTotalCosts] = useState(activeItem.totalCosts)
+  const [notes, setNotes] = useState(activeItem.notes)
   const [message, setMessage] = useState('')
-
-  const { addSession, error, userInfo } = useContext(GlobalContext)
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const newSession = {
-      host: userInfo._id,
+    const sessionUpdates = {
       location: location,
       date: date,
       time: time,
@@ -26,26 +27,24 @@ const AddSession = ({ handleClose }) => {
       notes: notes,
     }
 
-    addSession(newSession, userInfo.token)
+    editSession(activeItem._id, sessionUpdates, userInfo.token)
 
     if (!error) {
-      setLocation('')
-      setDate('')
-      setTime('')
-      setTotalCosts('')
-      setNotes('')
+      setMessage('Updated!')
     } else {
-      setMessage('Something went horribly wrong')
+      setMessage('Update failed')
     }
   }
+
   return (
-    <>
+    <FormContainer>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='location'>
           <Form.Label>Location</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Enter Location'
+            value={location}
+            placeholder='Enter location'
             onChange={(e) => setLocation(e.target.value)}
           />
         </Form.Group>
@@ -54,6 +53,7 @@ const AddSession = ({ handleClose }) => {
           <Form.Label>Date</Form.Label>
           <Form.Control
             type='Date'
+            value={moment(date).format('YYYY-MM-D')}
             placeholder='Enter Date'
             onChange={(e) => setDate(e.target.value)}
           />
@@ -63,6 +63,7 @@ const AddSession = ({ handleClose }) => {
           <Form.Label>Time</Form.Label>
           <Form.Control
             type='text'
+            value={time}
             placeholder='Enter Time'
             onChange={(e) => setTime(e.target.value)}
           />
@@ -72,6 +73,7 @@ const AddSession = ({ handleClose }) => {
           <Form.Label>Total Cost</Form.Label>
           <Form.Control
             type='text'
+            value={totalCosts}
             placeholder='Enter Total Cost'
             onChange={(e) => setTotalCosts(e.target.value)}
           />
@@ -81,24 +83,22 @@ const AddSession = ({ handleClose }) => {
           <Form.Label>Additional Notes</Form.Label>
           <Form.Control
             type='textarea'
+            value={notes}
             placeholder='Add Notes'
             onChange={(e) => setNotes(e.target.value)}
           />
         </Form.Group>
         <br></br>
-        <br></br>
-        <Button size='md' variant='primary' type='submit'>
+        <Button variant='primary' type='submit'>
           Submit
         </Button>
       </Form>
-      {message && (
-        <Alert className='my-3' variant='danger'>
-          {message}
-        </Alert>
-      )}
       <br></br>
-    </>
+      {message && (
+        <Alert variant={error ? 'danger' : 'success'}>{message}</Alert>
+      )}
+    </FormContainer>
   )
 }
 
-export default AddSession
+export default EditSession

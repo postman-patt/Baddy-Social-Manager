@@ -10,6 +10,7 @@ const SingleSession = () => {
     activeItem,
     addPlayer,
     handleCloseSession,
+    handleShowEditSession,
     removePlayer,
   } = useContext(GlobalContext)
 
@@ -58,15 +59,26 @@ const SingleSession = () => {
 
         <Modal.Footer>
           {userInfo._id === activeItem.host._id && (
-            <Button
-              variant='danger'
-              onClick={() => {
-                deleteSession(activeItem._id, userInfo.token)
-                handleCloseSession()
-              }}
-            >
-              Delete
-            </Button>
+            <>
+              <Button
+                variant='danger'
+                onClick={() => {
+                  deleteSession(activeItem._id, userInfo.token)
+                  handleCloseSession()
+                }}
+              >
+                Delete
+              </Button>
+              <Button
+                variant='info'
+                onClick={() => {
+                  handleShowEditSession()
+                  handleCloseSession()
+                }}
+              >
+                Edit
+              </Button>
+            </>
           )}{' '}
           {activeItem.players.every((item) => item._id !== userInfo._id) ? (
             <Button
@@ -85,7 +97,7 @@ const SingleSession = () => {
                 handleCloseSession()
               }}
             >
-              Remove
+              REMOVE MY NAME
             </Button>
           )}
         </Modal.Footer>

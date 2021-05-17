@@ -19,6 +19,6 @@ router
   .post(protect, addPlayer)
   .put(protect, removePlayer)
 
-router.route('/edit/:id').put(editSession)
+router.route('/edit/:id').put(protect, editSession)
 
 export default router

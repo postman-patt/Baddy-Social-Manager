@@ -3,6 +3,7 @@ import { Container, ListGroup, Modal, Button, Row, Col } from 'react-bootstrap'
 import { GlobalContext } from '../context/GlobalState'
 import Session from './Session'
 import AddSession from './AddSession'
+import EditSession from './EditSession'
 import SingleSession from './SingleSession'
 import LoginScreen from './LoginScreen'
 import Paginate from './Paginate'
@@ -21,6 +22,8 @@ const SessionList = ({ match }) => {
     show,
     handleShowSession,
     handleCloseSession,
+    showEdit,
+    handleCloseEditSession,
     activeItem,
     page,
     pages,
@@ -45,6 +48,7 @@ const SessionList = ({ match }) => {
 
   return (
     <>
+      <p>You are logged in as: {userInfo.name}</p>
       <Container>
         <Row>
           <Button variant='primary' size='lg' onClick={handleShow}>
@@ -88,6 +92,20 @@ const SessionList = ({ match }) => {
                 <Modal.Body>
                   <SingleSession />
                 </Modal.Body>
+              </Modal>
+              <Modal
+                show={showEdit}
+                onHide={handleCloseEditSession}
+                keyboard='false'
+                size='lg'
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Session</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <EditSession />
+                </Modal.Body>
+                <Modal.Footer></Modal.Footer>
               </Modal>
             </div>
           ))}

@@ -16,6 +16,14 @@ const AppReducer = (state, action) => {
           (session) => session._id !== action.payload
         ),
       }
+    case 'EDIT_SESSION':
+      return {
+        ...state,
+        sessions: state.sessions.map((session) =>
+          session._id === action.payload._id ? action.payload : session
+        ),
+        activeItem: action.payload,
+      }
     case 'ADD_SESSION':
       return {
         ...state,
@@ -45,6 +53,10 @@ const AppReducer = (state, action) => {
       return { ...state, activeItem: action.payload, show: true }
     case 'HANDLE_CLOSE_SESSION':
       return { ...state, show: false }
+    case 'HANDLE_SHOW_EDIT_SESSION':
+      return { ...state, activeEditItem: action.payload, showEdit: true }
+    case 'HANDLE_CLOSE_EDIT_SESSION':
+      return { ...state, showEdit: false }
 
     case 'ADD_PLAYER':
       return {

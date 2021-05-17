@@ -12,6 +12,8 @@ const initialState = {
   show: false,
   page: '',
   pages: [],
+  activeEditItem: '',
+  showEdit: false,
 }
 
 //Create Context
@@ -87,6 +89,32 @@ export const GlobalProvider = ({ children }) => {
       })
     }
   }
+
+  async function editSession(id, sessionUpdates, token) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+    try {
+      const res = await axios.put(
+        `/api/sessions/edit/${id}`,
+        sessionUpdates,
+        config
+      )
+      dispatch({
+        type: 'EDIT_SESSION',
+        payload: res.data.data,
+      })
+    } catch (err) {
+      dispatch({
+        type: 'GET_ERROR',
+        payload: err.response.data.error,
+      })
+    }
+  }
+
   //Show Session modals
 
   async function handleShowSession(session) {
@@ -99,6 +127,19 @@ export const GlobalProvider = ({ children }) => {
   async function handleCloseSession() {
     dispatch({
       type: 'HANDLE_CLOSE_SESSION',
+    })
+  }
+
+  async function handleShowEditSession(session) {
+    dispatch({
+      type: 'HANDLE_SHOW_EDIT_SESSION',
+      payload: session,
+    })
+  }
+
+  async function handleCloseEditSession() {
+    dispatch({
+      type: 'HANDLE_CLOSE_EDIT_SESSION',
     })
   }
 
@@ -223,10 +264,13 @@ export const GlobalProvider = ({ children }) => {
         deleteSession,
         addSession,
         getSessions,
+        editSession,
         login,
         logout,
         handleShowSession,
         handleCloseSession,
+        handleShowEditSession,
+        handleCloseEditSession,
         addPlayer,
         removePlayer,
         registerUser,
@@ -237,6 +281,8 @@ export const GlobalProvider = ({ children }) => {
         show: state.show,
         page: state.page,
         pages: state.pages,
+        activeEditItem: state.activeEditItem,
+        showEdit: state.showEdit,
       }}
     >
       {children}
