@@ -1,8 +1,8 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
-import { Form, Button, Alert, Col, Row } from 'react-bootstrap'
+import { Form, Button, Alert } from 'react-bootstrap'
 
 const AddSession = ({ handleClose }) => {
   const [location, setLocation] = useState('')
@@ -40,7 +40,7 @@ const AddSession = ({ handleClose }) => {
   }
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className='add-session'>
         <Form.Group controlId='location'>
           <Form.Label>Location</Form.Label>
           <Form.Control
@@ -80,7 +80,8 @@ const AddSession = ({ handleClose }) => {
         <Form.Group controlId='notes'>
           <Form.Label>Additional Notes</Form.Label>
           <Form.Control
-            type='textarea'
+            as='textarea'
+            rows={3}
             placeholder='Add Notes'
             onChange={(e) => setNotes(e.target.value)}
           />

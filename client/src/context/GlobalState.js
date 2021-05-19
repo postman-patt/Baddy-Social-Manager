@@ -252,9 +252,18 @@ export const GlobalProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: 'GET_ERROR',
-        payload: err.response.data.error,
+        payload: err.response.data.message,
       })
     }
+  }
+
+  async function removeError() {
+    try {
+      dispatch({
+        type: 'GET_ERROR',
+        payload: null,
+      })
+    } catch {}
   }
 
   return (

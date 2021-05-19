@@ -17,22 +17,31 @@ const SingleSession = () => {
   if (activeItem) {
     return (
       <>
-        <ListGroup>
-          <ListGroup.Item>
-            <p>Hosted By: {activeItem.host.name}</p>
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <p>email: {activeItem.host.email}</p>
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <p>Date: {moment(activeItem.date).format('dddd MMMM d, YYYY')}</p>
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <p>Time: {activeItem.time}</p>
-          </ListGroup.Item>
-          <ListGroup.Item>
+        <ListGroup variant='flush' className='session-details'>
+          <ListGroup.Item variant='primary'>
             <p>
-              Costs per player: $
+              <span>Hosted By:</span> {activeItem.host.name}
+            </p>
+          </ListGroup.Item>
+          <ListGroup.Item variant='primary'>
+            <p>
+              <span>Email:</span> {activeItem.host.email}
+            </p>
+          </ListGroup.Item>
+          <ListGroup.Item variant='primary'>
+            <p>
+              <span>Date:</span>{' '}
+              {moment(activeItem.date).format('dddd MMMM d, YYYY')}
+            </p>
+          </ListGroup.Item>
+          <ListGroup.Item variant='primary'>
+            <p>
+              <span>Time:</span> {activeItem.time}
+            </p>
+          </ListGroup.Item>
+          <ListGroup.Item variant='primary'>
+            <p>
+              <span>Costs per player:</span> $
               {activeItem.players.length !== 1
                 ? (
                     parseInt(activeItem.totalCosts) /
@@ -41,19 +50,23 @@ const SingleSession = () => {
                 : parseInt(activeItem.totalCosts)}
             </p>
           </ListGroup.Item>
-          <ListGroup.Item>
-            <p>Venue: {activeItem.location}</p>
+          <ListGroup.Item variant='primary'>
+            <p>
+              <span>Venue:</span> {activeItem.location}
+            </p>
           </ListGroup.Item>
-          <ListGroup.Item>
-            List of Players:
+          <ListGroup.Item variant='primary'>
+            <span>List of Players:</span>
             <br></br>
             <br></br>
             {activeItem.players.map((player) => (
               <p>{player.name}</p>
             ))}
           </ListGroup.Item>
-          <ListGroup.Item>
-            <p>Additional Notes: {activeItem.notes}</p>
+          <ListGroup.Item variant='primary'>
+            <p>
+              <span>Additional Notes:</span> {activeItem.notes}
+            </p>
           </ListGroup.Item>
         </ListGroup>
 
@@ -87,7 +100,7 @@ const SingleSession = () => {
                 handleCloseSession()
               }}
             >
-              JOIN
+              Join
             </Button>
           ) : (
             <Button
@@ -97,7 +110,7 @@ const SingleSession = () => {
                 handleCloseSession()
               }}
             >
-              REMOVE MY NAME
+              Remove
             </Button>
           )}
         </Modal.Footer>

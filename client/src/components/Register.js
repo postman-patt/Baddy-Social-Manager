@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
@@ -9,6 +9,7 @@ const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [registerSuccess, setregisterSuccess] = useState(false)
@@ -23,10 +24,13 @@ const Register = () => {
       email: email,
       password: password,
     }
+    if (confirmPassword !== password) {
+      setMessage('Passwords do not match.')
+    } else {
+      registerUser(newUser)
+    }
 
-    registerUser(newUser)
-
-    if (!error) {
+    if (error === '') {
       setMessage('Congratulations you have succeccfully registered!')
       setName('')
       setEmail('')
@@ -37,12 +41,19 @@ const Register = () => {
     }
   }
   return (
-    <FormContainer>
+    <FormContainer mdsize={4}>
       {!registerSuccess ? (
-        <Form onSubmit={submitHandler}>
-          <h1>Registration</h1>
+        <Form
+          onSubmit={submitHandler}
+          className='sign-up-form'
+          data-aos='fade-up'
+          data-aos-duration='1000'
+          data-aos-delay='700'
+        >
+          <h2>Sign Up!</h2>
           <br></br>
           {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+          {message && <Message variant='danger'>{message}</Message>}
           <Form.Group controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -73,9 +84,27 @@ const Register = () => {
             />
           </Form.Group>
           <br></br>
-          <Button type='submit' size='lg' variant='success'>
-            Register
-          </Button>
+          <Form.Group controlId='confirmPassword'>
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              type='password'
+              placeholder='Confirm password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </Form.Group>
+          <br></br>
+          <br></br>
+          <Row>
+            <Col>
+              <Button type='submit' size='lg' variant='success'>
+                Register
+              </Button>
+            </Col>
+            <Col className='d-flex justify-content-end align-items-end'>
+              <Link to='/'>Go Back</Link>
+            </Col>
+          </Row>
         </Form>
       ) : (
         <div className='justify-content-md-center text-center'>

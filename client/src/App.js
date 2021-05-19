@@ -3,7 +3,7 @@ import Header from './components/Header'
 import SessionList from './components/SessionList'
 import Register from './components/Register'
 import { Container } from 'react-bootstrap'
-import { GlobalProvider, GlobalContext } from './context/GlobalState'
+import { GlobalProvider } from './context/GlobalState'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Footer from './components/Footer'
 

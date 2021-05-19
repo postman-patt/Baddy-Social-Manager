@@ -1,4 +1,5 @@
 body {
+  color: white;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -7,24 +8,80 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body h1 {
+  color: #ffffff;
+  font-size: 80px;
+}
+
+.sign-up-form h2 {
+  color: #ffffff;
+  font-size: 35px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 body {
-  background-color: #141b4d !important;
+  background-color: #141b4d;
 }
 
 section {
-  background-color: white;
-  margin-top: 150px !important;
-  display: 'flex' !important;
-  align-items: 'center' !important;
-  justify-content: 'center' !important;
+  margin-top: 150px;
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
 }
 
+.single-session {
+  font-family: 'Montserrat';
+  font-size: 14px;
+}
+
+.fa-people-arrows {
+  font-size: 100px;
+  margin-right: 25px;
+}
+section i {
+  font-size: 25px;
+  margin-right: 10px;
+}
 .fa-check-circle {
-  font-size: 200px !important;
-  color: green !important;
+  font-size: 200px;
+  color: #78c2ad;
+}
+
+.player-number {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.session-details {
+  font-size: 20px;
+}
+
+.session-details span {
+  font-weight: 500;
+}
+
+.modal-content {
+  background-color: #e4f3ef;
+}
+
+.close {
+  background-color: #e4f3ef;
+  border: none;
+  font-size: 40px;
+}
+
+.modal-title {
+  padding-top: 15px;
+  font-size: 30px;
+  margin: auto;
+}
+
+.add-session .form-group label {
+  color: #487468;
+  font-weight: 500;
 }

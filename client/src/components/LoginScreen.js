@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import FormContainer from '../components/FormContainer'
+import Message from './Message'
+import Loader from './Loader'
+import FormContainer from './FormContainer'
 import { GlobalContext } from '../context/GlobalState'
 
 const LoginScreen = () => {
@@ -21,11 +21,16 @@ const LoginScreen = () => {
   }
 
   return (
-    <FormContainer>
+    <FormContainer mdsize='4'>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
 
-      <Form onSubmit={submitHandler}>
+      <Form
+        onSubmit={submitHandler}
+        data-aos='fade-up'
+        data-aos-duration='1000'
+        data-aos-delay='700'
+      >
         <Form.Group controlId='email'>
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -52,7 +57,7 @@ const LoginScreen = () => {
       </Form>
       <Row className='py-3'>
         <Col>
-          New Customer? <Link to='/register'>Register here</Link>
+          New player? <Link to='/register'>Register here</Link>
         </Col>
       </Row>
     </FormContainer>

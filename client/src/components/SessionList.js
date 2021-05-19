@@ -73,42 +73,43 @@ const SessionList = ({ match }) => {
                     className='pt-3'
                     data-aos='fade-up'
                     data-aos-duration='1000'
-                    data-aos-offset='500'
                     data-aos-delay='700'
                   >
                     <Session session={session} />
                   </ListGroup.Item>
                 </ListGroup>
               </a>
-              <Modal
-                show={show}
-                onHide={handleCloseSession}
-                keyboard='false'
-                size='lg'
-              >
-                <Modal.Header closeButton>
-                  <Modal.Title>Session Details</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <SingleSession />
-                </Modal.Body>
-              </Modal>
-              <Modal
-                show={showEdit}
-                onHide={handleCloseEditSession}
-                keyboard='false'
-                size='lg'
-              >
-                <Modal.Header closeButton>
-                  <Modal.Title>Edit Session</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <EditSession />
-                </Modal.Body>
-                <Modal.Footer></Modal.Footer>
-              </Modal>
             </div>
           ))}
+        <Modal
+          show={show}
+          onHide={handleCloseSession}
+          keyboard='false'
+          size='lg'
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Session Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <SingleSession />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          show={showEdit}
+          onHide={handleCloseEditSession}
+          keyboard='false'
+          size='lg'
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Session</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <EditSession />
+          </Modal.Body>
+        </Modal>
+
         <br></br>
         <Row>
           <Col>
@@ -121,7 +122,7 @@ const SessionList = ({ match }) => {
               Logout
             </Button>
           </Col>
-          <Col>
+          <Col className='d-flex justify-content-end'>
             <Paginate pages={pages} page={page} />
           </Col>
         </Row>

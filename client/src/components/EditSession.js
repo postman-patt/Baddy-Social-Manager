@@ -37,7 +37,7 @@ const EditSession = () => {
   }
 
   return (
-    <FormContainer>
+    <FormContainer mdsize={8}>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='location'>
           <Form.Label>Location</Form.Label>
@@ -83,6 +83,7 @@ const EditSession = () => {
           <Form.Label>Additional Notes</Form.Label>
           <Form.Control
             type='textarea'
+            rows={3}
             value={notes}
             placeholder='Add Notes'
             onChange={(e) => setNotes(e.target.value)}
