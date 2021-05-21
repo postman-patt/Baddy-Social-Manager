@@ -85,6 +85,16 @@ const AppReducer = (state, action) => {
         userInfo: action.payload,
       }
 
+    case 'CHANGE_PAID_STATUS':
+      return {
+        ...state,
+        sessions: state.sessions.map((session) =>
+          session._id === action.payload._id
+            ? { ...session, players: action.payload.players }
+            : session
+        ),
+        activeItem: { ...state.activeItem, players: action.payload.players },
+      }
     default:
       return state
   }

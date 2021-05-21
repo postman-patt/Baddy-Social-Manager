@@ -7,7 +7,14 @@ import FormContainer from './FormContainer'
 import moment from 'moment'
 
 const EditSession = () => {
-  const { activeItem, editSession, userInfo, error } = useContext(GlobalContext)
+  const {
+    activeItem,
+    editSession,
+    userInfo,
+    error,
+    handleShowSession,
+    handleCloseEditSession,
+  } = useContext(GlobalContext)
 
   const [location, setLocation] = useState(activeItem.location)
   const [date, setDate] = useState(activeItem.date)
@@ -38,7 +45,7 @@ const EditSession = () => {
 
   return (
     <FormContainer mdsize={8}>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className='edit-session'>
         <Form.Group controlId='location'>
           <Form.Label>Location</Form.Label>
           <Form.Control
@@ -82,17 +89,20 @@ const EditSession = () => {
         <Form.Group controlId='notes'>
           <Form.Label>Additional Notes</Form.Label>
           <Form.Control
-            type='textarea'
+            as='textarea'
             rows={3}
             value={notes}
-            placeholder='Add Notes'
+            placeholder='Add notes here...'
             onChange={(e) => setNotes(e.target.value)}
           />
         </Form.Group>
         <br></br>
-        <Button variant='primary' type='submit'>
-          Submit
-        </Button>
+        <br></br>
+        <div className='d-flex justify-content-center'>
+          <Button variant='primary' type='submit' size='lg'>
+            Update
+          </Button>
+        </div>
       </Form>
       <br></br>
       {message && (

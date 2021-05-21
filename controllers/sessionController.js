@@ -24,7 +24,10 @@ export const getSessions = async (req, res, next) => {
       .skip(pageSize * (page - 1))
       .sort({ date: 'desc' })
       .populate('host')
-      .populate('players')
+      .populate({
+        path: 'players',
+        populate: { path: 'player', model: 'User' },
+      })
 
     return res.status(200).json({
       success: true,
@@ -136,17 +139,24 @@ export const deleteSessions = async (req, res, next) => {
 export const addPlayer = async (req, res, next) => {
   try {
     const session = await Session.findById(req.params.id)
+
     if (!session) {
       return res.status(404).json({
         success: false,
         error: 'No sessions found',
       })
     } else {
-      await session.players.push(req.body.players)
+      await session.players.push(req.body)
       await session.save()
+      const newSession = await Session.findById(req.params.id)
+        .populate('host')
+        .populate({
+          path: 'players',
+          populate: { path: 'player', model: 'User' },
+        })
       return res.status(200).json({
         success: true,
-        data: session,
+        data: newSession,
       })
     }
   } catch (err) {
@@ -170,11 +180,17 @@ export const removePlayer = async (req, res, next) => {
         error: 'No sessions found',
       })
     } else {
-      await session.players.remove(req.body.players)
+      await session.players.remove({ _id: req.body.playerid })
       await session.save()
+      const newSession = await Session.findById(req.params.id)
+        .populate('host')
+        .populate({
+          path: 'players',
+          populate: { path: 'player', model: 'User' },
+        })
       return res.status(200).json({
         success: true,
-        data: session,
+        data: newSession,
       })
     }
   } catch (err) {
@@ -182,5 +198,64 @@ export const removePlayer = async (req, res, next) => {
       success: false,
       error: err,
     })
+  }
+}
+
+//@desc Edit paid status
+//@route PUT /api/sessions/edit/paid/:id
+//@access public
+
+export const editPaid = async (req, res, next) => {
+  try {
+    const session = await Session.findOne({ _id: req.params.id })
+
+    const player = session.players.filter(
+      (item) => item._id == req.body.playerSessionId
+    )
+
+    if (!player[0].paid) {
+      const newSession = await Session.findOneAndUpdate(
+        { _id: req.params.id, 'players._id': req.body.playerSessionId },
+        { $set: { 'players.$.paid': true } },
+        { returnOriginal: false }
+      )
+        .populate('host')
+        .populate({
+          path: 'players',
+          populate: { path: 'player', model: 'User' },
+        })
+      return res.status(201).json({
+        success: true,
+        data: newSession,
+      })
+    } else {
+      const newSession = await Session.findOneAndUpdate(
+        { _id: req.params.id, 'players._id': req.body.playerSessionId },
+        { $set: { 'players.$.paid': false } },
+        { returnOriginal: false }
+      )
+        .populate('host')
+        .populate({
+          path: 'players',
+          populate: { path: 'player', model: 'User' },
+        })
+      return res.status(201).json({
+        success: true,
+        data: newSession,
+      })
+    }
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      const message = Object.values(err.errors).map((val) => val.message)
+      return res.status(400).json({
+        success: false,
+        error: message,
+      })
+    } else {
+      return res.status(500).json({
+        success: false,
+        error: err,
+      })
+    }
   }
 }

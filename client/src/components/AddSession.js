@@ -88,9 +88,11 @@ const AddSession = ({ handleClose }) => {
         </Form.Group>
         <br></br>
         <br></br>
-        <Button size='md' variant='primary' type='submit'>
-          Submit
-        </Button>
+        <div className='d-flex justify-content-center'>
+          <Button size='lg' variant='primary' type='submit'>
+            Submit
+          </Button>
+        </div>
       </Form>
       {message && (
         <Alert className='my-3' variant='danger'>

@@ -48,13 +48,17 @@ const SessionList = ({ match }) => {
 
   return (
     <>
-      <p>You are logged in as: {userInfo.name}</p>
+      <p>You are logged in as {userInfo.name}</p>
       <Container>
-        <Row>
-          <Button variant='primary' size='lg' onClick={handleShow}>
-            Create a session
-          </Button>
-        </Row>
+        <ListGroup className='create-session'>
+          <ListGroup.Item className='create-session'>
+            <Row>
+              <Button variant='primary' size='lg' onClick={handleShow}>
+                Create a session
+              </Button>
+            </Row>
+          </ListGroup.Item>
+        </ListGroup>
         {userInfo &&
           sessions &&
           sessions.map((session) => (

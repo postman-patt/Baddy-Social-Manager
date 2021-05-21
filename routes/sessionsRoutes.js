@@ -6,6 +6,7 @@ import {
   addPlayer,
   removePlayer,
   editSession,
+  editPaid,
 } from '../controllers/sessionController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
@@ -20,5 +21,7 @@ router
   .put(protect, removePlayer)
 
 router.route('/edit/:id').put(protect, editSession)
+
+router.route('/edit/paid/:id').put(protect, editPaid)
 
 export default router

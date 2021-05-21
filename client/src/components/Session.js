@@ -15,7 +15,7 @@ const Session = ({ session }) => {
         <i className='fas fa-clock'></i>
         {session.time}
       </Col>
-      <Col xs={{ span: 1 }} className='player-number'>
+      <Col xs={1} className='player-number'>
         <i className='fas fa-users'></i>
         {session.players.length}
       </Col>

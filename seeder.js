@@ -62,9 +62,7 @@ const importData = async () => {
 const destroyData = async () => {
   try {
     //Delete all entries
-    await Order.deleteMany()
-    await Product.deleteMany()
-    await User.deleteMany()
+    await Session.deleteMany()
 
     console.log('Data Destroyed'.red.inverse)
     process.exit()

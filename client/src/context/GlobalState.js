@@ -146,7 +146,7 @@ export const GlobalProvider = ({ children }) => {
   //Add/Remove Player
   async function addPlayer(id, player, token) {
     try {
-      const newPlayer = { players: player }
+      const newPlayer = { player: player }
 
       const config = {
         headers: {
@@ -167,9 +167,9 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function removePlayer(id, player, token) {
+  async function removePlayer(id, playerid, token) {
     try {
-      const newPlayer = { players: player }
+      const newPlayer = { playerid: playerid }
 
       const config = {
         headers: {
@@ -177,6 +177,7 @@ export const GlobalProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       }
+      console.log(newPlayer)
       const res = await axios.put(`/api/sessions/${id}`, newPlayer, config)
       dispatch({
         type: 'REMOVE_PLAYER',
@@ -257,13 +258,32 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function removeError() {
+  //Mark session as paid
+  async function markPaid(id, playerSessionId, token) {
     try {
+      const changePaidStatus = { playerSessionId: playerSessionId }
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const res = await axios.put(
+        `/api/sessions/edit/paid/${id}`,
+        changePaidStatus,
+        config
+      )
+      dispatch({
+        type: 'CHANGE_PAID_STATUS',
+        payload: res.data.data,
+      })
+    } catch (err) {
       dispatch({
         type: 'GET_ERROR',
-        payload: null,
+        error: 'something went wrong',
       })
-    } catch {}
+    }
   }
 
   return (
@@ -283,6 +303,7 @@ export const GlobalProvider = ({ children }) => {
         addPlayer,
         removePlayer,
         registerUser,
+        markPaid,
         error: state.error,
         loading: state.loading,
         userInfo: state.userInfo,

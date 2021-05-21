@@ -58,7 +58,14 @@ section i {
 }
 
 .session-details {
-  font-size: 20px;
+  font-size: 16px;
+  font-family: 'Montserrat';
+}
+
+.session-details p {
+  font-weight: 400;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .session-details span {
@@ -73,15 +80,55 @@ section i {
   background-color: #e4f3ef;
   border: none;
   font-size: 40px;
+  color: #487468;
 }
 
 .modal-title {
+  color: #487468;
   padding-top: 15px;
-  font-size: 30px;
+  padding-left: 25px;
+  font-size: 35px;
   margin: auto;
+  font-family: 'Montserrat' !important;
+}
+
+.player-title h2 {
+  font-size: 35px !important;
+  font-family: 'Montserrat' !important;
+}
+
+.options-title h2 {
+  font-size: 35px !important;
+  font-family: 'Montserrat' !important;
 }
 
 .add-session .form-group label {
   color: #487468;
   font-weight: 500;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Montserrat';
+}
+
+.edit-session .form-group label {
+  color: #487468;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Montserrat';
+}
+
+.fa-check-square {
+  font-size: 30px;
+}
+
+.fa-square {
+  font-size: 30px;
+}
+
+.create-session {
+  background-color: #141b4d !important;
+  border: #ffffff;
 }

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
 mongoose.set('bufferTimeoutMS', 20000)
+mongoose.set('useFindAndModify', false)
 
 //Using mongoose to connect to the database as MongoDB Atlas
 const connectDB = async () => {

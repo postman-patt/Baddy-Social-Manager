@@ -20,8 +20,15 @@ const SessionSchema = new mongoose.Schema({
   },
   players: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      player: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      paid: {
+        type: Boolean,
+        required: true,
+        default: false,
+      },
     },
   ],
   totalCosts: {
