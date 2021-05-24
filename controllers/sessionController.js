@@ -42,6 +42,49 @@ export const getSessions = async (req, res, next) => {
   }
 }
 
+//@desc Get user sessions
+//@route GET /api/sessions
+//@access private
+
+export const getUserSessions = async (req, res, next) => {
+  try {
+    const pageSize = 5
+    const page = Number(req.query.pageNumber) || 1
+
+    const keyword = req.query.keyword
+      ? {
+          name: {
+            $regex: req.query.keyword,
+            $options: 'i',
+          },
+        }
+      : {}
+    const count = await Session.countDocuments({ ...keyword })
+    const sessions = await Session.find({
+      $or: [{ host: req.user._id }, { 'players.player': req.user._id }],
+    })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1))
+      .sort({ date: 'desc' })
+      .populate('host')
+      .populate({
+        path: 'players',
+        populate: { path: 'player', model: 'User' },
+      })
+
+    return res.status(200).json({
+      success: true,
+      count: sessions.length,
+      data: { sessions, page, pages: Math.ceil(count / pageSize) },
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: 'Something went wrongg',
+    })
+  }
+}
+
 //@desc Add sessions
 //@route POST /api/sessions
 //@access private

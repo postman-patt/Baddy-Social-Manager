@@ -18,7 +18,7 @@ const Session = ({ session }) => {
       </Col>
       <Col xs={3}>
         <i className='fas fa-calendar-alt'></i>
-        {moment(session.date).format('dddd MMMM d, YYYY')}
+        {moment(session.date).format('dddd D MMMM, YYYY')}
       </Col>
       <Col xs={3}>
         <i className='fas fa-clock'></i>

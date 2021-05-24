@@ -159,3 +159,27 @@ section i {
 .single-session .fa-check-circle {
   font-size: 30px;
 }
+
+.logged-in p {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  color: #ffffff !important;
+}
+
+.logged-in i {
+  margin-left: 5px;
+  color: #ffffff;
+}
+
+.profile-form {
+  font-family: 'Montserrat';
+  background-color: #2c3462 !important;
+}
+
+.profile-form h3 {
+  color: #ffffff;
+}
+
+.user-session-list h3 {
+  color: #ffffff;
+}

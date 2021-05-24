@@ -49,6 +49,30 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function getUserSessions(token, pageNumber = '') {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const res = await axios.get(
+        `/api/sessions/usersessions?pageNumber=${pageNumber}`,
+        config
+      )
+      dispatch({
+        type: 'GET_SESSIONS',
+        payload: res.data.data,
+      })
+    } catch (err) {
+      console.log(err)
+      dispatch({
+        type: 'GET_ERROR',
+        payload: err.response.data.error,
+      })
+    }
+  }
+
   async function deleteSession(id, token) {
     try {
       const config = {
@@ -258,6 +282,34 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function updateUser(updatedUser, token) {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+
+      const { data } = await axios.put(
+        '/api/users/profile',
+        updatedUser,
+        config
+      )
+
+      dispatch({
+        type: 'UPDATE_USER_PROFILE_SUCCESS',
+        payload: data,
+      })
+      localStorage.setItem('userInfo', JSON.stringify(data))
+    } catch (err) {
+      dispatch({
+        type: 'GET_ERROR',
+        payload: err.response.data.message,
+      })
+    }
+  }
+
   //Mark session as paid
   async function markPaid(id, playerSessionId, token) {
     try {
@@ -293,6 +345,7 @@ export const GlobalProvider = ({ children }) => {
         deleteSession,
         addSession,
         getSessions,
+        getUserSessions,
         editSession,
         login,
         logout,
@@ -303,6 +356,7 @@ export const GlobalProvider = ({ children }) => {
         addPlayer,
         removePlayer,
         registerUser,
+        updateUser,
         markPaid,
         error: state.error,
         loading: state.loading,

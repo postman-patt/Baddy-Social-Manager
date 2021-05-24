@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Container, ListGroup, Modal, Button, Row, Col } from 'react-bootstrap'
 import { GlobalContext } from '../context/GlobalState'
+import { Link } from 'react-router-dom'
 import Session from './Session'
 import AddSession from './AddSession'
 import EditSession from './EditSession'
@@ -49,7 +50,18 @@ const SessionList = ({ match }) => {
 
   return (
     <>
-      <p>You are logged in as {userInfo.name}</p>
+      <Row>
+        <Col className='d-flex justify-content-center logged-in'>
+          {' '}
+          <p>
+            You are logged in as {userInfo.name}{' '}
+            <Link to='/profile/page/1' style={{ textDecoration: 'none' }}>
+              <i className='fas fa-user'></i>
+            </Link>
+          </p>
+        </Col>
+      </Row>
+
       <Container>
         <ListGroup className='create-session'>
           <ListGroup.Item className='create-session'>

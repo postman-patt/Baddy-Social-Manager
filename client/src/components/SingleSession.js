@@ -49,7 +49,7 @@ const SingleSession = () => {
                 <span>Date</span>
               </Col>
               <Col>
-                <p>{moment(activeItem.date).format('dddd MMMM d, YYYY')}</p>
+                <p>{moment(activeItem.date).format('dddd DD MMMM, YYYY')}</p>
               </Col>
             </Row>
           </ListGroup.Item>

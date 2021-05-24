@@ -84,7 +84,12 @@ const AppReducer = (state, action) => {
         loading: true,
         userInfo: action.payload,
       }
-
+    case 'UPDATE_USER_PROFILE_SUCCESS':
+      return {
+        ...state,
+        loading: true,
+        userInfo: action.payload,
+      }
     case 'CHANGE_PAID_STATUS':
       return {
         ...state,

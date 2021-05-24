@@ -1,6 +1,7 @@
 import express from 'express'
 import {
   getSessions,
+  getUserSessions,
   addSessions,
   deleteSessions,
   addPlayer,
@@ -13,6 +14,7 @@ import { protect } from '../middleware/authMiddleware.js'
 const router = express.Router()
 
 router.route('/').get(getSessions).post(protect, addSessions)
+router.route('/usersessions').get(protect, getUserSessions)
 
 router
   .route('/:id')
