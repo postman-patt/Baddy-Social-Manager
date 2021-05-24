@@ -102,10 +102,19 @@ section i {
   font-family: 'Montserrat' !important;
 }
 
+.add-session {
+  font-family: 'Montserrat';
+}
+
+.add-session i {
+  font-family: 'Montserrat';
+  color: #487468;
+}
+
 .add-session .form-group label {
   color: #487468;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
   margin-top: 20px;
   margin-bottom: 20px;
   font-family: 'Montserrat';
@@ -120,6 +129,14 @@ section i {
   font-family: 'Montserrat';
 }
 
+.edit-session {
+  font-family: 'Montserrat';
+}
+
+.edit-session i {
+  font-family: 'Montserrat';
+  color: #487468;
+}
 .fa-check-square {
   font-size: 30px;
 }
@@ -131,4 +148,14 @@ section i {
 .create-session {
   background-color: #141b4d !important;
   border: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .single-session i {
+    display: none;
+  }
+}
+
+.single-session .fa-check-circle {
+  font-size: 30px;
 }

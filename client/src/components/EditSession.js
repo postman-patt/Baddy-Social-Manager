@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
-import { Form, Button, Alert } from 'react-bootstrap'
+import { Form, Button, Alert, Row, Col } from 'react-bootstrap'
 import FormContainer from './FormContainer'
 import moment from 'moment'
 
@@ -18,7 +18,12 @@ const EditSession = () => {
 
   const [location, setLocation] = useState(activeItem.location)
   const [date, setDate] = useState(activeItem.date)
-  const [time, setTime] = useState(activeItem.time)
+  const [FromTime, setFromTime] = useState(
+    moment(activeItem.time.split(' - ')[0], 'hh:mm A').format('HH:mm:ss')
+  )
+  const [ToTime, setToTime] = useState(
+    moment(activeItem.time.split(' - ')[1], 'hh:mm A').format('HH:mm:ss')
+  )
   const [totalCosts, setTotalCosts] = useState(activeItem.totalCosts)
   const [notes, setNotes] = useState(activeItem.notes)
   const [message, setMessage] = useState('')
@@ -29,7 +34,10 @@ const EditSession = () => {
     const sessionUpdates = {
       location: location,
       date: date,
-      time: time,
+      time: `${moment(FromTime, 'HH:mm:ss').format('hh:mm A')} - ${moment(
+        ToTime,
+        'HH:mm:ss'
+      ).format('hh:mm A')}`,
       totalCosts: totalCosts,
       notes: notes,
     }
@@ -44,7 +52,7 @@ const EditSession = () => {
   }
 
   return (
-    <FormContainer mdsize={8}>
+    <FormContainer>
       <Form onSubmit={handleSubmit} className='edit-session'>
         <Form.Group controlId='location'>
           <Form.Label>Location</Form.Label>
@@ -60,7 +68,7 @@ const EditSession = () => {
           <Form.Label>Date</Form.Label>
           <Form.Control
             type='Date'
-            value={moment(date).format('YYYY-MM-D')}
+            value={moment(date).format('YYYY-MM-DD')}
             placeholder='Enter Date'
             onChange={(e) => setDate(e.target.value)}
           />
@@ -68,12 +76,42 @@ const EditSession = () => {
         <br></br>
         <Form.Group controlId='time'>
           <Form.Label>Time</Form.Label>
-          <Form.Control
-            type='text'
-            value={time}
-            placeholder='Enter Time'
-            onChange={(e) => setTime(e.target.value)}
-          />
+          <Row>
+            <Col
+              lg={1}
+              className='d-flex justify-content-center align-self-center'
+            >
+              <i>Start</i>
+            </Col>
+            <Col>
+              <Form.Control
+                type='time'
+                value={FromTime}
+                onChange={(e) =>
+                  setFromTime(
+                    moment(e.target.value, 'HH:mm:ss').format('HH:mm:ss')
+                  )
+                }
+              />
+            </Col>
+            <Col
+              md={1}
+              className='d-flex justify-content-center align-self-center'
+            >
+              <i>End</i>
+            </Col>
+            <Col>
+              <Form.Control
+                type='time'
+                value={ToTime}
+                onChange={(e) =>
+                  setToTime(
+                    moment(e.target.value, 'HH:mm:ss').format('HH:mm:ss')
+                  )
+                }
+              />
+            </Col>
+          </Row>
         </Form.Group>
         <br></br>
         <Form.Group controlId='totalCosts'>
@@ -96,13 +134,12 @@ const EditSession = () => {
             onChange={(e) => setNotes(e.target.value)}
           />
         </Form.Group>
-        <br></br>
-        <br></br>
-        <div className='d-flex justify-content-center'>
-          <Button variant='primary' type='submit' size='lg'>
+
+        <Row className='d-flex justify-content-center'>
+          <Button variant='primary' type='submit' size='lg' className='mt-5'>
             Update
           </Button>
-        </div>
+        </Row>
       </Form>
       <br></br>
       {message && (

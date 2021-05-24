@@ -9,6 +9,7 @@ import LoginScreen from './LoginScreen'
 import Paginate from './Paginate'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import moment from 'moment'
 
 const SessionList = ({ match }) => {
   const pageNumber = match.params.pageNumber || 1
@@ -59,6 +60,7 @@ const SessionList = ({ match }) => {
             </Row>
           </ListGroup.Item>
         </ListGroup>
+
         {userInfo &&
           sessions &&
           sessions.map((session) => (
@@ -103,7 +105,7 @@ const SessionList = ({ match }) => {
           show={showEdit}
           onHide={handleCloseEditSession}
           keyboard='false'
-          size='lg'
+          size='md'
           centered
         >
           <Modal.Header closeButton>
@@ -135,9 +137,9 @@ const SessionList = ({ match }) => {
       <Modal
         show={showAdd}
         onHide={handleClose}
-        backdrop='static'
         keyboard='false'
-        size='lg'
+        size='md'
+        centered
       >
         <Modal.Header closeButton>
           <Modal.Title>Add Session</Modal.Title>
