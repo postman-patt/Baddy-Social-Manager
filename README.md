@@ -1,4 +1,4 @@
-Baddy Social Manager 
+<h1>Baddy Social Manager</h1> 
 
 Applicaton to manage social badminton sessions
 
