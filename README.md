@@ -1,8 +1,9 @@
 <h1>Baddy Social Manager</h1> 
 
-Applicaton to manage social badminton sessions
+<p>Applicaton to manage social badminton sessions</p>
 
-Features
+<h2>Features</h2>
+<ul>
   -Creating sessions
   -Joining sessions
   -Showing the list of players associated with the session
@@ -10,7 +11,7 @@ Features
   -Editing session
   -Deleting sessions
   -Unjoin sessions
-  
+</ul>  
 Setup
 Requires a mongoDB database with collection for users and sessions.
 
