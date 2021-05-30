@@ -3,15 +3,9 @@ import { Row, Col } from 'react-bootstrap'
 import moment from 'moment'
 
 const Session = ({ session }) => {
-  const currentDate = new Date()
   return (
     <Row className='single-session'>
-      <Col xs={2}>
-        {new Date(session.date).getTime() < currentDate.getTime() && (
-          <i className='fas fa-check-circle'></i>
-        )}
-        Host: {session.host.name}
-      </Col>
+      <Col xs={2}>Host: {session.host.name}</Col>
       <Col xs={3}>
         <i className='fas fa-location-arrow'></i>
         {session.location}

@@ -5,6 +5,7 @@ import moment from 'moment'
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
 const SingleSession = () => {
+  const currentDate = new Date()
   const {
     deleteSession,
     userInfo,
@@ -107,6 +108,7 @@ const SingleSession = () => {
                 <h2>Players</h2>
               </Col>
             </Row>
+
             {activeItem.players.map((player) => (
               <Row className='py-1'>
                 <Col className='d-flex justify-content-center'>
@@ -121,6 +123,18 @@ const SingleSession = () => {
                 </Col>
               </Row>
             ))}
+            <Row className='mt-5 paid-unpaid'>
+              <Col></Col>
+              <Col></Col>
+              <Col className='d-flex justify-content-center align-items-center'>
+                <i className='far fa-check-square px-3'></i>
+                <p>Paid</p>
+              </Col>
+              <Col className='d-flex justify-content-center align-items-center'>
+                <i className='far fa-square px-3'></i>
+                <p>Unpaid</p>
+              </Col>
+            </Row>
           </ListGroup.Item>
 
           <ListGroup.Item variant='primary'>
@@ -178,6 +192,11 @@ const SingleSession = () => {
                 <Button
                   block
                   size='lg'
+                  disabled={
+                    new Date(activeItem.date).getTime() < currentDate.getTime()
+                      ? 'true'
+                      : ''
+                  }
                   variant='danger'
                   onClick={() => {
                     removePlayer(

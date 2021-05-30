@@ -14,7 +14,7 @@ import moment from 'moment'
 
 const SessionList = ({ match }) => {
   const pageNumber = match.params.pageNumber || 1
-
+  const currentDate = new Date()
   const {
     loading,
     sessions,
@@ -83,7 +83,13 @@ const SessionList = ({ match }) => {
                 }}
                 style={{ textDecoration: 'none' }}
               >
-                <ListGroup className='my-2'>
+                <ListGroup
+                  className={
+                    new Date(session.date).getTime() < currentDate.getTime()
+                      ? 'my-2 past-session'
+                      : 'my-2 current-session'
+                  }
+                >
                   <ListGroup.Item
                     key={session._id}
                     variant='primary'

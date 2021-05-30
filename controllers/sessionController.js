@@ -59,7 +59,9 @@ export const getUserSessions = async (req, res, next) => {
           },
         }
       : {}
-    const count = await Session.countDocuments({ ...keyword })
+    const count = await Session.countDocuments({
+      $or: [{ host: req.user._id }, { 'players.player': req.user._id }],
+    })
     const sessions = await Session.find({
       $or: [{ host: req.user._id }, { 'players.player': req.user._id }],
     })

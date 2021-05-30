@@ -19,6 +19,7 @@ import 'aos/dist/aos.css'
 
 const Profile = ({ match }) => {
   const pageNumber = match.params.pageNumber || 1
+  const currentDate = new Date()
   const {
     userInfo,
     sessions,
@@ -134,8 +135,7 @@ const Profile = ({ match }) => {
           </Row>
           <Row>
             {' '}
-            {userInfo &&
-              sessions &&
+            {userInfo && sessions.length !== 0 ? (
               sessions.map((session) => (
                 <div key={session._id}>
                   <a
@@ -144,7 +144,13 @@ const Profile = ({ match }) => {
                     }}
                     style={{ textDecoration: 'none' }}
                   >
-                    <ListGroup className='my-2'>
+                    <ListGroup
+                      className={
+                        new Date(session.date).getTime() < currentDate.getTime()
+                          ? 'my-2 past-session'
+                          : 'my-2 current-session'
+                      }
+                    >
                       <ListGroup.Item
                         key={session._id}
                         variant='primary'
@@ -159,7 +165,12 @@ const Profile = ({ match }) => {
                     </ListGroup>
                   </a>
                 </div>
-              ))}
+              ))
+            ) : (
+              <Col className='d-flex justify-content-center no-sessions py-5'>
+                <p>You are currently not involved in any sessions.</p>
+              </Col>
+            )}
           </Row>
         </Col>
 

@@ -30,7 +30,7 @@ const Register = () => {
       registerUser(newUser)
     }
 
-    if (error === '') {
+    if (!error) {
       setMessage('Congratulations you have succeccfully registered!')
       setName('')
       setEmail('')
@@ -107,15 +107,27 @@ const Register = () => {
           </Row>
         </Form>
       ) : (
-        <div className='justify-content-md-center text-center'>
-          <i className='far fa-check-circle'></i>
-          <br></br>
-          <br></br>
-          <h1>{message}</h1>
-          <br></br>
-          <br></br>
-          <Link to='/'>Login to browse sessions</Link>
-        </div>
+        <>
+          <Row
+            className='justify-content-md-center text-center mb-5'
+            data-aos='zoom-out-right'
+            data-aos-duration='1000'
+            data-aos-delay='700'
+          >
+            <i className='far fa-check-circle'></i>
+          </Row>
+          <Row
+            className='justify-content-md-center text-center sign-up-success my-3'
+            data-aos='zoom-out-right'
+            data-aos-duration='1000'
+            data-aos-delay='700'
+          >
+            <h1>Congratulations you have succeccfully registered!</h1>
+          </Row>
+          <Row className='justify-content-md-center text-center'>
+            <Link to='/'>Login to browse sessions</Link>
+          </Row>
+        </>
       )}
     </FormContainer>
   )

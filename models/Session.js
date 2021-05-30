@@ -18,6 +18,9 @@ const SessionSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add a date'],
   },
+  maxPlayers: {
+    type: Number,
+  },
   players: [
     {
       player: {

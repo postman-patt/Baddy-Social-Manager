@@ -51,7 +51,7 @@ const LoginScreen = () => {
           />
         </Form.Group>
         <br></br>
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant='primary' size='lg'>
           Sign In
         </Button>
       </Form>

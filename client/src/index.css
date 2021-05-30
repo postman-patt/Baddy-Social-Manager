@@ -183,3 +183,22 @@ section i {
 .user-session-list h3 {
   color: #ffffff;
 }
+
+.no-sessions p {
+  color: #efefef;
+  font-family: 'Montserrat';
+}
+
+.paid-unpaid i,
+.paid-unpaid p {
+  font-size: 14px;
+}
+
+.past-session {
+  opacity: 0.6;
+}
+
+.sign-up-success h1 {
+  font-size: 25px;
+  line-height: 2.5rem;
+}
