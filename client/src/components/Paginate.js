@@ -10,7 +10,7 @@ const Paginate = ({ path, pages, page }) => {
           <LinkContainer
             key={x + 1}
             to={
-              path == '/profile' ? `/profile/page/${x + 1}` : `/page/${x + 1}`
+              path === '/profile' ? `/profile/page/${x + 1}` : `/page/${x + 1}`
             }
           >
             <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item>

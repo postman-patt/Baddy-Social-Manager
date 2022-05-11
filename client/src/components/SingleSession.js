@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Button, ListGroup, Row, Col, Form } from 'react-bootstrap'
+import { Button, ListGroup, Row, Col } from 'react-bootstrap'
 import { GlobalContext } from '../context/GlobalState'
 import moment from 'moment'
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
@@ -73,7 +73,7 @@ const SingleSession = () => {
               <Col>
                 <p>
                   $
-                  {activeItem.players.length !== 1
+                  {activeItem.players.length > 2
                     ? (
                         parseInt(activeItem.totalCosts) /
                         parseInt(activeItem.players.length)

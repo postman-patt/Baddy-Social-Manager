@@ -60,8 +60,16 @@ const Profile = ({ match }) => {
       password: password,
     }
 
-    if (password !== confirmPassword) {
-      setMessage('Passwords do not match')
+    if (
+      confirmPassword !== password ||
+      password.length < 8 ||
+      name.length === 0
+    ) {
+      setMessage([
+        'Name and password fields are populated',
+        'Password is at least 8 characters long',
+        'Passwords must match',
+      ])
     } else {
       updateUser(updatedUser, userInfo.token)
       setMessage('Successfully updated')
@@ -83,6 +91,16 @@ const Profile = ({ match }) => {
             <div className='mb-4'>
               <h3>Profile</h3>
             </div>
+            {message.length > 0 && (
+              <Alert variant='danger'>
+                <p>Please ensure that:</p>
+                <ul>
+                  {message.map((m) => (
+                    <li>{m}</li>
+                  ))}
+                </ul>
+              </Alert>
+            )}
             <Form.Group controlId='name'>
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -90,16 +108,6 @@ const Profile = ({ match }) => {
                 placeholder='Enter Name'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-              />
-            </Form.Group>
-            <br></br>
-            <Form.Group controlId='email'>
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type='email'
-                placeholder='Enter Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <br></br>
@@ -122,7 +130,6 @@ const Profile = ({ match }) => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </Form.Group>
-            {message && <Alert>{message}</Alert>}
 
             <Button variant='primary' type='submit' className='mt-4' size='lg'>
               Update profile

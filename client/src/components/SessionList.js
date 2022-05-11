@@ -10,7 +10,6 @@ import LoginScreen from './LoginScreen'
 import Paginate from './Paginate'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import moment from 'moment'
 
 const SessionList = ({ match }) => {
   const pageNumber = match.params.pageNumber || 1
@@ -54,9 +53,9 @@ const SessionList = ({ match }) => {
         <Col className='d-flex justify-content-center logged-in'>
           {' '}
           <p>
-            You are logged in as {userInfo.name}{' '}
+            You are logged in as{' '}
             <Link to='/profile/page/1' style={{ textDecoration: 'none' }}>
-              <i className='fas fa-user'></i>
+              {userInfo.name} <i className='fas fa-user'></i>
             </Link>
           </p>
         </Col>

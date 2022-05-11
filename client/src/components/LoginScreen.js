@@ -55,7 +55,7 @@ const LoginScreen = () => {
           Sign In
         </Button>
       </Form>
-      <Row className='py-3'>
+      <Row className='py-5'>
         <Col>
           New player? <Link to='/register'>Register here</Link>
         </Col>

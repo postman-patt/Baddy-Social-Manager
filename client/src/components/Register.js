@@ -24,20 +24,29 @@ const Register = () => {
       email: email,
       password: password,
     }
-    if (confirmPassword !== password) {
-      setMessage('Passwords do not match.')
+
+    if (
+      confirmPassword !== password ||
+      email.length === 0 ||
+      password.length < 8 ||
+      name.length === 0
+    ) {
+      setMessage([
+        'Name, email and password fields are populated',
+        'Password is at least 8 characters long',
+        'Passwords must match',
+      ])
     } else {
       registerUser(newUser)
-    }
-
-    if (!error) {
-      setMessage('Congratulations you have succeccfully registered!')
-      setName('')
-      setEmail('')
-      setPassword('')
-      setregisterSuccess('true')
-    } else {
-      setErrorMessage(error)
+      if (!error) {
+        setMessage(['Congratulations you have succeccfully registered!'])
+        setName('')
+        setEmail('')
+        setPassword('')
+        setregisterSuccess('true')
+      } else {
+        setErrorMessage(error)
+      }
     }
   }
   return (
@@ -53,7 +62,16 @@ const Register = () => {
           <h2>Sign Up!</h2>
           <br></br>
           {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-          {message && <Message variant='danger'>{message}</Message>}
+          {message.length > 0 && (
+            <Message variant='danger'>
+              <p>Please ensure that:</p>
+              <ul>
+                {message.map((m) => (
+                  <li>{m}</li>
+                ))}
+              </ul>
+            </Message>
+          )}
           <Form.Group controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
