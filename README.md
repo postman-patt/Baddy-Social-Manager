@@ -1,6 +1,7 @@
-<h1>Baddy Social Manager</h1>
+<h1>Badminton Social Manager</h1>
 
-<p>Applicaton to manage social badminton sessions</p>
+<p>Applicaton to manage social badminton sessions.</p>
+<p> Tech stack includes MongoDB, Express, React and NodeJS. Hosted on AWS EC2 Instance, with database hosted on MongoDB (Migrated from AWS DocumentDB)</p>
 
 <h2>Features</h2>
 <ul>
