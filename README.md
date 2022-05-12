@@ -2,7 +2,7 @@
 
 <p>Applicaton to manage social badminton sessions.</p>
 
-[DEMO Hosted on AWS EC2](ec2-3-84-104-222.compute-1.amazonaws.com)
+[DEMO Hosted on AWS EC2](http://ec2-3-84-104-222.compute-1.amazonaws.com)
 
 <p> Tech stack includes MongoDB, Express, React and NodeJS. Hosted on AWS EC2 Instance, with database hosted on MongoDB (Migrated from AWS DocumentDB)</p>
 
